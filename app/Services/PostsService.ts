@@ -1,28 +1,25 @@
 import Post from 'App/Models/Post'
-import { uuid } from 'uuidv4';
 
 interface PostsUpdateStore {
+    user_id: string,
     title: string
     description: string
 }
 
 export class PostsService  {
-    public async index(): Promise<Post[]>
+    public async index(user_id: string): Promise<Post[]>
     {
-        return await Post.all()
+        return await Post.query().where('user_id', user_id)
     }
     public async store(data: PostsUpdateStore): Promise<Post>
     {
-        return await Post.create({
-            id: uuid(),
-            ...data
-        })
+        return await Post.create({ ...data })
     }
     public async show(id: string): Promise<Post>
     {
         return await Post.findOrFail(id)
     }
-    public async update(id: string, data: PostsUpdateStore): Promise<any>
+    public async update(id: string, data: PostsUpdateStore): Promise<Post>
     {
         const post = await Post.findOrFail(id)
         return await post.merge(data).save()
