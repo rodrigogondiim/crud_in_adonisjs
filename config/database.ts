@@ -23,17 +23,6 @@ const databaseConfig: DatabaseConfig = {
   connection: Env.get('DB_CONNECTION'),
 
   connections: {
-    /*
-    |--------------------------------------------------------------------------
-    | SQLite
-    |--------------------------------------------------------------------------
-    |
-    | Configuration for the SQLite database.  Make sure to install the driver
-    | from npm when using this connection
-    |
-    | npm i sqlite3
-    |
-    */
     pg: {
       client: 'pg',
       connection: {
